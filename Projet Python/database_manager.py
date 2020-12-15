@@ -1,6 +1,8 @@
 import sqlite3
 
 
+# from password_manager import cls
+
 def connect():
     try:
         sqliteConnection = sqlite3.connect('accounts.db')
@@ -28,14 +30,12 @@ def store_passwords(givenpassword, givenemail, givenuser, givenurl, givenname):
     finally:
         if (conn):
             conn.close()
-            print("\nThe DB connection is closed")
-
+            print("Successfully close DB\n")
 
 def retrieve_app_password(app_name):
     try:
         conn = connect()
         cursor = conn.cursor()
-        print("Successfully Connected to DB\n")
 
         sql_select_query = "SELECT password FROM accounts WHERE app_name = ?"
         query_variables = (app_name,)
@@ -44,22 +44,20 @@ def retrieve_app_password(app_name):
         conn.commit()
         result = cursor.fetchall()
 
-        print('Your password is: ', result[0])
+        print('Your password is: ', result[0][0])
 
     except (Exception, sqlite3.Error) as error:
         print("Failed to fetching data from DB, the error message is as follows: ", error)
     finally:
         if (conn):
             conn.close()
-            print("\nThe DB connection is closed")
 
 
-def find_password_for_accounts(user_email):
-    data = ('Password = ', 'Email = ', 'Username = ', 'url = ', 'name = ')
+def retrieve_password_for_account(user_email):
+    data = ('Password = ', 'Email = ', 'Username = ', 'url = ', 'nickname = ')
     try:
         conn = connect()
         cursor = conn.cursor()
-        print("Successfully Connected to DB\n")
 
         sql_select_query = "SELECT password, email, username, url, app_name, id FROM accounts WHERE email = ?"
         query_variables = (user_email,)
@@ -89,11 +87,30 @@ def find_password_for_accounts(user_email):
     finally:
         if (conn):
             conn.close()
-            print("\nThe DB connection is closed")
+
 
 def verify_app_name(app_name):
-    pass
+    try:
+        conn = connect()
+        cursor = conn.cursor()
 
+        sql_select_query = "SELECT app_name FROM accounts WHERE app_name = ?"
+        query_variables = (app_name,)
+        cursor.execute(sql_select_query, query_variables)
+
+        conn.commit()
+        result = cursor.fetchall()
+
+        if app_name in result[0][0]:
+            return True
+
+        else:
+            return False
+    except (Exception, sqlite3.Error) as error:
+        print(" beep Failed to fetching data from DB, the error message is as follows: ", error)
+    finally:
+        if (conn):
+            conn.close()
 
 # find_users('saskia@mail')
 # find_password('FACEBOOK')
