@@ -1,7 +1,5 @@
 import string, random                                                                                           
                                                                                                                 
-import string, random                                                                                           
-                                                                                                                
                                                                                                                 
 def encrypt_password(pwd):                                                                                      
     pass                                                                                                        
