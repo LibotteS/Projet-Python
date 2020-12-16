@@ -36,7 +36,8 @@ while choice not in ['Q', 'q']:
     if choice == '3':  # email to find accounts associated
         find_password_for_accounts()
         cls()
-    if choice not in ['q', 'Q','1', '2', '3']: #required since if we do not put this the choice 3 is stuck on a loop, no idea why
+    if choice not in ['q', 'Q', '1', '2',
+                      '3']:  # required since if we do not put this the choice 3 is stuck on a loop, no idea why
         print('\nError, choice not recognised')
         time.sleep(1)
         cls()

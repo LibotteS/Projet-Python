@@ -1,7 +1,5 @@
 import sqlite3
 
-#this is a test
-# from password_manager import cls
 
 def connect():
     try:
@@ -31,6 +29,7 @@ def store_passwords(givenpassword, givenemail, givenuser, givenurl, givenname):
         if (conn):
             conn.close()
             print("Successfully close DB\n")
+
 
 def retrieve_app_password(app_name):
     try:

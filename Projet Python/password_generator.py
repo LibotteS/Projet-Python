@@ -9,10 +9,12 @@ def generate_key():
     with open('secret.key', 'wb') as key_file:  # write binary
         key_file.write(key)
 
+
 def load_key():
     if os.stat("secret.key").st_size == 0:
         generate_key()
     return open('secret.key', 'rb').read()  # read binary
+
 
 def encrypt_password(password):
     key = load_key()

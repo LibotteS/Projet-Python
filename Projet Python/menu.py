@@ -1,7 +1,5 @@
 import string, random
-from database_manager import store_passwords, retrieve_app_password, retrieve_password_for_account, verify_app_name,
-from password_generator import
-# from password_manager import cls
+from database_manager import store_passwords, retrieve_app_password, retrieve_password_for_account, verify_app_name
 
 minimum_length = 6
 
@@ -28,7 +26,8 @@ def fill():
     while not is_taken:
         if verify_app_name(app_name):
             print(
-                'The given nickname > ', app_name, ' < already exists. It MUST be UNIQUE, please enter another nickname : ')
+                'The given nickname > ', app_name,
+                ' < already exists. It MUST be UNIQUE, please enter another nickname : ')
             app_name = input('\nUser => ')
         else:
             is_taken = True
@@ -36,6 +35,7 @@ def fill():
     print('\nPlease make a choice, would you rather : ')
     print('1. Enter your own password')
     print('2. Use the random password generator')
+    print('3. Use the word complexifier')
     answer = input('\nUser => ')
 
     password = ''
