@@ -1,5 +1,6 @@
 import string, random
 from database_manager import store_passwords, retrieve_app_password, retrieve_password_for_account, verify_app_name
+from password_generator import encrypt_password
 
 minimum_length = 6
 
