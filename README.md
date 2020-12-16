@@ -1,2 +1,3 @@
 # Projet-Python
-manger de mot de passe 
+
+Password manager with an integrated generator and password verifier
