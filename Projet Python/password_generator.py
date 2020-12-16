@@ -1,34 +1,40 @@
-import string, random
+import os, string, random
 from cryptography.fernet import Fernet
 
 
+# encryption
+
 def generate_key():
-    """
-    Generates a key and save it into a file
-    """
     key = Fernet.generate_key()
-    with open("secret.key", "wb") as key_file:
+    with open('secret.key', 'wb') as key_file:  # write binary
         key_file.write(key)
 
 def load_key():
-    """
-    Load the previously generated key
-    """
-    return open("secret.key", "rb").read()
+    if os.stat("secret.key").st_size == 0:
+        generate_key()
+    return open('secret.key', 'rb').read()  # read binary
 
-def encrypt_message(message):
-    """
-    Encrypts a message
-    """
+def encrypt_password(password):
     key = load_key()
-    encoded_message = message.encode()
+    encoded_password = password.encode()
     f = Fernet(key)
-    encrypted_message = f.encrypt(encoded_message)
+    encrypted_password = f.encrypt(encoded_password)
+    print(encrypted_password)
+    return encrypted_password
 
-    print(encrypted_message)
 
-if __name__ == "__main__":
-    encrypt_message("encrypt this message")
+def decrypt_password(encrypted_password):
+    key = load_key()
+    f = Fernet(key)
+    decrypted_password = f.decrypt(encrypted_password)
+    return decrypted_password
+
+
+if __name__ == '__main__':
+    encrypt_password('encrypt this password')
+
+
+# generating password
 
 
 def random_password_cpx3(length):
@@ -61,9 +67,6 @@ def random_password_cpx2(user_password):
             pwd[i] = 'T'
 
     return "".join(pwd)
-
-
-Fernet.generate_key()
 
 # length = x  complexity 1-3
 # dictionnaire
