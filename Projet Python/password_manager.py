@@ -1,4 +1,4 @@
-import os, time
+import os, time, getpass
 from menu import menu, fill, find_app_password, find_password_for_accounts
 from secret import get_master_password
 
@@ -12,7 +12,7 @@ cls()
 
 secret = get_master_password()
 print('Please enter the master password to start using you password manager: ')
-userPassword = input('MASTER PASSWORD => ')
+userPassword = getpass.getpass("Enter your password: ")
 
 if userPassword == secret:
     cls()
