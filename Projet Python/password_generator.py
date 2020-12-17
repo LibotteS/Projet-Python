@@ -44,7 +44,7 @@ def random_password_cpx3(length):
     return ''.join(random.choice(characters) for i in range(int(length)))
 
 
-def random_password_cpx2(user_password):
+def random_password_cpx2(user_password): #random 1/x chance le i...
     pwd = list(user_password)
     for i in range(len(pwd)):
         if pwd[i] == 'a':

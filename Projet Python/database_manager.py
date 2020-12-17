@@ -2,11 +2,13 @@ import sqlite3
 
 
 def connect():
+    sqlite_connection = None
     try:
-        sqliteConnection = sqlite3.connect('accounts.db')
-        return sqliteConnection
+        sqlite_connection = sqlite3.connect('accounts.db')
     except (Exception, sqlite3.Error) as error:
         print('There was an error trying to connect to the DB, the error message is as follows: ', error)
+    finally:
+        return sqlite_connection
 
 
 def store_passwords(givenpassword, givenemail, givenuser, givenurl, givenname):
@@ -100,11 +102,9 @@ def verify_app_name(app_name):
         conn.commit()
         result = cursor.fetchall()
 
-        if app_name in result[0][0]:
-            return True
+        # verify if something in the
+        return app_name in result[0][0]
 
-        else:
-            return False
     except (Exception, sqlite3.Error) as error:
         print(" beep Failed to fetching data from DB, the error message is as follows: ", error)
     finally:

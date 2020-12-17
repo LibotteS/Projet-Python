@@ -7,7 +7,7 @@ def cls():  # will clear the screen
     cls = os.system('cls')
     return cls
 
-
+#__main
 cls()
 
 secret = get_master_password()
